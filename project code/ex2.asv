@@ -1,0 +1,101 @@
+clc,clear
+%s1=input('Enter the first state variable :');
+%s2=input('Enter the second state variable :') ;
+s1=[1 2 3 ];
+s2=[1 2 3];
+wc1=[1 2];
+wc2=[1 2];
+a=[];
+for i=1 : length(s1)
+for j=1 : length(s2)
+for k=1:length(wc1)
+for l=1:length(wc2)
+a=[a;[s1(i),s2(j),wc1(k),wc2(l)]];
+end
+end
+end
+end
+a
+x=zeros(length(a),length(a));
+n=a;
+n1=[];
+n2=[];
+x1=[];
+x2=[];
+for i =1 : length(a)
+    x1=n(i,:);
+    x2=n(i,:);
+for ii=1:2
+
+if(ii==1)
+    x1(i,1)=1;
+x1(i,2)=min(x1(i,2)+1,max(s1));
+x1(i,3)=ii;
+n1=[n1;x1(i,:)];
+else
+    x2(i,1)=1;
+x2(i,2)=min(x2(i,2)+1,max(s1));
+x2(i,3)=ii;
+n2=[n2;x2(i,:)];
+end
+end
+end
+n1
+n2
+m=a;
+m1=[];
+m2=[];
+for i =1 : length(a)
+for ii=1:2
+m(i,2)=1;
+m(i,1)=min(m(i,1)+1,max(s1));
+m(i,4)=ii;
+if(ii==1)
+m1=[m1;m(i,:)];
+else
+m2=[m2;m(i,:)];
+end
+end
+end
+m1
+m2
+v1=[];
+v2=[];
+for i=1 : length(n1)
+for j=1 : length(a)
+if (n1(i,:)==a(j,:))
+v1=[v1;j];
+end
+if (n2(i,:)==a(j,:))
+v2=[v2;j];
+end
+end
+end
+v1
+v2
+w1=[];
+w2=[];
+for i=1 : length(m)
+for j=1 : length(a)
+if (m1(i,:)==a(j,:))
+w1=[w1;j];
+end
+if (m2(i,:)==a(j,:))
+w2=[w2;j];
+end
+end
+end
+w1
+w2
+p1=x;
+for i = 1 : length(v1)
+p1(i,v1(i))=0.5;
+p1(i,v2(i))=0.5;
+end
+p1
+p2=x;
+for i = 1 : length(w1)
+p2(i,w1(i))=0.7;
+p2(i,w2(i))=0.3;
+end
+p2

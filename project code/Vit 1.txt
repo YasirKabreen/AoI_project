@@ -1,0 +1,26 @@
+clc,clear
+R=[.2 .8 0 0 0;.2 0 .8 0 0; 0 0 0 0 0; 0 0 .2 0 .8; 0 0 0 .2 .8];
+L=[.8 .2 0 0 0; .8 0 .2 0 0; 0 0 0 0 0; 0 0 .8 0 .2; 0 0 0 .8 .2];
+reward=[0 0 1 0 0]';
+V=[0 0 0 0 0]';
+g=0.9;
+
+for i=1:10000
+VnextL=reward+g*L*V;
+VnextR=reward+g*R*V;
+
+for j=1:length(V)
+if VnextL(j) > VnextR(j)
+Vnext(j)=VnextL(j);
+P(j)='L';
+
+else
+  Vnext(j)=VnextR(j);
+  P(j)='R';
+end
+
+end
+V=Vnext';
+end
+V
+P'

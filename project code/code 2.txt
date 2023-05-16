@@ -1,0 +1,35 @@
+from random import expovariate 
+from math import inf as infint
+from matplotlib import pyplot
+AOI=[]
+
+G=round(expovariate(1/2),1)
+A=round(expovariate(1/4),1)
+
+GR=[G]
+AR=[A+G]
+TR=[0]
+for i in range (5):
+   
+    GR.append((round((GR[i]+expovariate(1/8)),1)))
+    AR.append((round(AR[i]+expovariate(1/16),1)))
+    
+for i in range (len(GR)):
+    AOI.append(AR[i]-GR[i-1])
+    AOI.append(AR[i]-GR[i])
+
+for i in range (len(GR)):
+    TR.append(AR[i])
+    TR.append(AR[i])
+
+AOI[0]=0
+AOI.insert(1,AR[0])
+
+print(GR)
+print(AR)
+print(AOI)
+print(TR)
+print(len(AOI))
+print(len(TR))
+pyplot.plot(TR,AOI)
+pyplot.grid()

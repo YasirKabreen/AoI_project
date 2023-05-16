@@ -1,0 +1,64 @@
+from random import expovariate 
+from math import inf as infint
+from matplotlib import pyplot
+A1=[]
+A2=[]
+AOI=[]
+AOImax=[]
+AOImin=[]
+L=[]
+B=[]
+At=[]
+As=[]
+TR=[0]
+g=[2,4,5,7,9,12]
+r=[3,6,8,9,11,14]
+for i in range (len(r)):
+    AOI.append(r[i]-g[i-1])
+    AOI.append(r[i]-g[i])
+    
+    
+    
+for i in range (len(r)):
+    TR.append(r[i])
+    TR.append(r[i])
+
+AOI[0]=0
+AOI.insert(1,r[0])
+
+for i in  range(len(AOI)-1):
+    if (i % 2) == 0:
+           AOImin.append(AOI[i])
+    else:
+            AOImax.append(AOI[i])
+
+for i in  range(len(AOImax)):   
+    L.append(AOImax[i]-AOImin[i])
+
+r.insert(0,0)
+for i in  range(len(r)-1):
+    B.append(r[i+1]-r[i])
+    
+for i in  range(len(B)):
+    A1.append(B[i]*L[i])
+    At = sum(A1)/2
+    A2.append(B[i]*AOImin[i])
+    As = sum(A2)
+    Average_AOI=(As+At)/r[-1]
+print(Average_AOI)
+      
+      
+      
+      
+      
+      
+print(As)    
+print(At)
+print(TR)
+print(AOI)
+print(AOImax)
+print(AOImin)
+print(L)
+print(B)
+pyplot.plot(TR,AOI)
+pyplot.grid()
